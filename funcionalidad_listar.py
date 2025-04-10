@@ -16,3 +16,27 @@ def listar_profesores():
         print(f"Apellido: {datos['apellido']}")
         print(f"Grado: {datos['grado']}")
         print("-" * 20)
+
+def listar_estudiantes():
+    import json
+    try:
+        with open("estudiantes.json", "r") as cargar:
+            estudiantes = json.load(cargar)
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("No hay estudiantes registrados.")
+        return
+    if not estudiantes:
+        print("No hay estudiantes registrados.")
+        return
+    print("Lista de estudiantes:")
+    for documento, datos in estudiantes.items():
+        print(f"Documento: {documento}")
+        print(f"Nombre: {datos['nombre']}")
+        print(f"Apellido: {datos['apellido']}")
+        print(f"Grado: {datos['grado']}")
+        print("-" * 20)
+
+
+
+
+        
