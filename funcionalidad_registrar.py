@@ -9,18 +9,18 @@ def registrar_student():
         with open("estudiantes.json", "r") as cargar:
             estudiantes = json.load(cargar)
     except (FileNotFoundError, json.JSONDecodeError):
-        estudiantes = []
+        estudiantes = {}
     if documento in estudiantes:
         print("El documento ya existe.")
         return
     else:
         print("Ingrese los siguientes datos del estudiante:")
         nombre = input("Nombre: ")
-        if not nombre.isalpha():
+        if not nombre.replace(" ", "").isalpha():
             print("El nombre debe contener solo letras.")
             return
         apellido = input("Apellido: ")
-        if not apellido.isalpha():
+        if not apellido.replace(" ", "").isalpha():
             print("El apellido debe contener solo letras.")
             return
         grado = input("Grado: ")
@@ -37,6 +37,6 @@ def registrar_student():
         }
         estudiantes[documento] = estudiante
         with open("estudiantes.json", "w") as guardar:
-            json.dump(estudiantes, guardar)
+            json.dump(estudiantes, guardar, indent=4)
         print("Estudiante registrado correctamente.")
 registrar_student()
