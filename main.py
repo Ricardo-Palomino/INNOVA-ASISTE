@@ -55,7 +55,7 @@ def menu_profesor():
             elif decision == 4:
                 submenu_modificar()
             elif decision == 5:
-                print("Eliminar")
+                submenu_eliminar()
             elif decision == 6:
                 print("Volviendo al menú principal...")
                 break  
@@ -89,9 +89,6 @@ def submenu_modificar():
                 print("Opcion no valida")
         except ValueError:
             print("ERROR: Debe ingresar un número válido.")
-        
-
-menu_principal()
 
 def submenu_eliminar():
         while True:
@@ -113,10 +110,8 @@ def submenu_eliminar():
                 break  
             else:
                 print(" Opción no válida. Intente de nuevo.")
-                submenu_eliminar()
 
 
-menu_principal()
 def menu_estudiante():
     while True:
         print("\n=== MENÚ DE ESTUDIANTE ===")
@@ -147,3 +142,4 @@ def menu_estudiante():
                 
         except ValueError:
             print("ERROR: Por favor ingrese un número válido")
+menu_principal()
