@@ -47,15 +47,15 @@ def menu_profesor():
             if decision <= 0:
                 print("Opción no válida")
             elif decision == 1:
-                tomar_asistencia()  
+                print("Tomar asistencia") 
             elif decision == 2:
-                listar_profesores()  
+                print("Listar profesores")
             elif decision == 3:
-                buscar_estudiante()  
+                print("Buscar estudiante")  
             elif decision == 4:
-                modificar_profesor()  
+                print("modificar")  
             elif decision == 5:
-                eliminar_profesor() 
+                print("Eliminar")
             elif decision == 6:
                 print("Volviendo al menú principal...")
                 break  
@@ -63,21 +63,6 @@ def menu_profesor():
                 print("Opción no válida")
         except ValueError:
             print("ERROR: Debe ingresar un número válido.")
-
-def tomar_asistencia():
-    print("Función para tomar asistencia (a implementar)")
-
-def listar_profesores():
-    print("Función para listar profesores (a implementar)")
-
-def buscar_estudiante():
-    print("Función para buscar estudiante (a implementar)")
-
-def modificar_profesor():
-    print("Función para modificar profesor (a implementar)")
-
-def eliminar_profesor():
-    print("Función para eliminar profesor (a implementar)")
 
 menu_principal()
 def menu_estudiante():
