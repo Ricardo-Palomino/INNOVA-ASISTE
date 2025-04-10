@@ -80,3 +80,33 @@ def eliminar_profesor():
     print("Función para eliminar profesor (a implementar)")
 
 menu_principal()
+def menu_estudiante():
+    while True:
+        print("\n=== MENÚ DE ESTUDIANTE ===")
+        print("1. Ver retrasos")
+        print("2. Ver asistencias")
+        print("3. Ver inasistencias")
+        print("4. Salir")
+        
+        try:
+            opcion = int(input("\nSeleccione una opción: "))
+            
+            if opcion <= 0:
+                print("Opción no válida")
+            elif opcion == 1:
+                # Aquí iría la lógica para ver retrasos
+                print("Verificando retrasos...")
+            elif opcion == 2:
+                # Aquí iría la lógica para ver asistencias
+                print("Mostrando asistencias...")
+            elif opcion == 3:
+                # Aquí iría la lógica para ver inasistencias
+                print("Mostrando inasistencias...")
+            elif opcion == 4:
+                print("Regresando al menú principal...")
+                break
+            else:
+                print("Opción no válida")
+                
+        except ValueError:
+            print("ERROR: Por favor ingrese un número válido")
