@@ -39,4 +39,43 @@ def registrar_student():
         with open("estudiantes.json", "w") as guardar:
             json.dump(estudiantes, guardar, indent=4)
         print("Estudiante registrado correctamente.")
-registrar_student()
+
+def register_docente():
+    import json
+    print("Ingrese el numero de documento del docente:")
+    documento = input("Documento: ")
+    if not documento.isdigit():
+        print("El documento debe ser un número.")
+        return
+    try:
+        with open("profesores.json", "r") as cargar:
+            docentes = json.load(cargar)
+    except (FileNotFoundError, json.JSONDecodeError):
+        docentes = {}
+    if documento in docentes:
+        print("El documento ya existe.")
+        return
+    else:
+        print("Ingrese los siguientes datos del docente:")
+        nombre = input("Nombre: ")
+        if not nombre.replace(" ", "").isalpha():
+            print("El nombre debe contener solo letras.")
+            return
+        apellido = input("Apellido: ")
+        if not apellido.replace(" ", "").isalpha():
+            print("El apellido debe contener solo letras.")
+            return
+        asignatura = input("Asignatura: ")
+        if not asignatura.replace(" ", "").isalpha():
+            print("La asignatura debe contener solo letras.")
+            return
+        docente= {
+            "nombre": nombre,
+            "apellido": apellido,
+            "asignatura": asignatura
+        }
+        docentes[documento] = docente
+        with open("profesores.json", "w") as guardar:
+            json.dump(docentes, guardar, indent=4)
+        print("Docente registrado correctamente.")
+register_docente()
