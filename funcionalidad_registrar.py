@@ -78,4 +78,40 @@ def register_docente():
         with open("profesores.json", "w") as guardar:
             json.dump(docentes, guardar, indent=4)
         print("Docente registrado correctamente.")
-register_docente()
+
+def register_attendance():
+    import datetime
+    import json
+    Hora_llegada= "06:30:00"
+    print("Ingrese el numero de documento del estudiante:")
+    documento = input("Documento: ")
+    if not documento.isdigit():
+        print("El documento debe ser un número.")
+        return
+    try:
+        with open("asistencias.json", "r") as cargar:
+            asistencias = json.load(cargar)
+    except (FileNotFoundError, json.JSONDecodeError):
+        asistencias = {}
+    if documento not in asistencias:
+        print ("El estudiante con ese numero de documento no existe no existe.")
+        return
+    else:
+        fecha= datetime.datetime.now().strftime("%Y-%m-%d")
+        hora= datetime.datetime.now().strftime("%H:%M:%S")
+        if hora > Hora_llegada:
+            retardo = "Si"
+            print ("El estudiante llego tarde")
+        asistencia= {
+            "fecha": fecha,
+            "hora": hora,
+            "Nombre": asistencias[documento]["nombre"],
+            "Apellido ": asistencias[documento]["apellido"],
+            "Grado ": asistencias[documento]["grado"],
+            "Asistencia ": "Presente",
+            "retardo": retardo
+        }
+        asistencias[documento] = asistencia
+        with open("asistencias.json", "w") as guardar:
+            json.dump(asistencias, guardar, indent=4)   
+        print("Asistencia registrada correctamente.")
