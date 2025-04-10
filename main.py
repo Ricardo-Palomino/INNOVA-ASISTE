@@ -5,23 +5,24 @@ def menu_principal ():
         while True:
             print("-------------")
             print("""
-                1. Registrar estudiante
-                2. Registrar profesor
-                3. Profesor 
-                4. Estudiante
+                MENU PRINCIPAL
+                1. Registrar profesor
+                2. Profesor 
+                3. Estudiante
+                4. salir
                 """)
             print ("Elija la opcion")
             decision=int(input("Opcion: "))
             if decision<=0:
                 print ("Opcion no valida")
             elif decision == 1:
-                print("Registrar estudiante")
+                print("Registrar profesor")
             elif decision == 2: 
-                print ("Registrar profesor")
+                print ("profesor")
             elif decision == 3:
-                print ("Profesor")
-            elif decision == 4:
                 print ("Estudiante")
+            elif decision == 4:
+                print ("Salir")
             else:
                 print ("Opcion no valida")
     except (ValueError):
