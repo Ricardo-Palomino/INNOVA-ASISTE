@@ -36,6 +36,25 @@ def listar_estudiantes():
         print(f"Grado: {datos['grado']}")
         print("-" * 20)
 
+def listar_asistencias_estudiantes():
+    import json 
+    try:
+        with open("asistencias.json", "r") as cargar:
+            asistencias = json.load(cargar)
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("No hay asistencias registradas.")
+        return
+    documento = input("Ingrese el documento de identidad del estudiante: ")
+    if documento not in asistencias:
+        print("No hay asistencias registradas para ese estudiante.")
+        return
+    for fecha, asistencia in asistencias[documento].items():
+        print(f"Fecha: {fecha}")
+        print(f"Asistencia: {'Presente' if asistencia else 'Ausente'}")
+        print("-" * 20)
+
+
+
 
 
 
