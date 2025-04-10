@@ -89,8 +89,32 @@ def submenu_modificar():
                 print("Opcion no valida")
         except ValueError:
             print("ERROR: Debe ingresar un número válido.")
+        
 
 menu_principal()
+
+def submenu_eliminar():
+        while True:
+            print("\n--- ¿Qué deseas eliminar? ---")
+            print("1. Eliminar asistencia de un estudiante")
+            print("2. Eliminar retardo de un estudiante")
+            print("3. Eliminar estudiante")
+            print("4. Volver al menú principal")
+        
+            opcion = input("Seleccione una opción (1-4): ")
+        
+            if opcion == "1":
+                print("Lógica para eliminar asistencia...")  
+            elif opcion == "2":
+                print("Lógica para eliminar retardo.z..")    
+            elif opcion == "3":
+                print("Lógica para eliminar estudiante...")   
+            elif opcion == "4":
+                break  
+            else:
+                print(" Opción no válida. Intente de nuevo.")
+                submenu_eliminar()
+
 
 menu_principal()
 def menu_estudiante():
