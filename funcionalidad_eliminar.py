@@ -32,4 +32,21 @@ def eliminar_asistencia():
             with open("asistencias.json", "w") as guardar:
                 json.dump(asistencias, guardar)
             print("Asistencia eliminada correctamente.")
+
+def eliminar_estudiante():
+    import json
+    print("Ingrese el documento de identidad del estudiante a eliminar")
+    documento= input("Documento: ")
+    try:
+        with open("estudiantes.json", "r") as cargar:
+            estudiantes=json.load(cargar)
+    except (FileNotFoundError, json.JSONDecodeError):
+        estudiantes= {}
+    if documento not in estudiantes:
+        print("El documento de ese estudiante no existe")
+    else:
+        del estudiantes[documento]
+        with open("estudiantes.json", "w") as guardar:
+            json.dump(estudiantes, guardar)
+        print("Estudiante eliminado correctamente.")
         
