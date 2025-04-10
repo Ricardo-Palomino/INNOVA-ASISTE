@@ -83,35 +83,66 @@ def register_attendance():
     import datetime
     import json
     Hora_llegada= "06:30:00"
-    print("Ingrese el numero de documento del estudiante:")
-    documento = input("Documento: ")
-    if not documento.isdigit():
-        print("El documento debe ser un número.")
-        return
+    try:
+        with open("estudiantes.json", "r") as cargar:
+            estudiantes = json.load(cargar)
+    except (FileNotFoundError, json.JSONDecodeError):
+        estudiantes = {}
     try:
         with open("asistencias.json", "r") as cargar:
             asistencias = json.load(cargar)
     except (FileNotFoundError, json.JSONDecodeError):
         asistencias = {}
-    if documento not in asistencias:
-        print ("El estudiante con ese numero de documento no existe no existe.")
-        return
-    else:
-        fecha= datetime.datetime.now().strftime("%Y-%m-%d")
-        hora= datetime.datetime.now().strftime("%H:%M:%S")
+
+    fecha= datetime.datetime.now().strftime("%Y-%m-%d")
+    hora= datetime.datetime.now().strftime("%H:%M:%S")
+    asistencias_hoy = set()
+    print("Ingrese el numero de documento del estudiante:")
+    print("Escriba 'terminar' para terminar de tomar asistencia.")
+
+    while True:
+        confirmacion=input("Documento del estudiante o 'terminar' para terminar la toma de asistencia: ")
+        if confirmacion.lower() == "terminar":
+            break
+        if confirmacion not in estudiantes:
+            print("El documento no existe.")
+            continue
         if hora > Hora_llegada:
             retardo = "Si"
             print ("El estudiante llego tarde")
+        else:
+            retardo = "No"
         asistencia= {
             "fecha": fecha,
             "hora": hora,
-            "Nombre": asistencias[documento]["nombre"],
-            "Apellido ": asistencias[documento]["apellido"],
-            "Grado ": asistencias[documento]["grado"],
+            "Nombre": asistencias[confirmacion]["nombre"],
+            "Apellido ": asistencias[confirmacion]["apellido"],
+            "Grado ": asistencias[confirmacion]["grado"],
             "Asistencia ": "Presente",
             "retardo": retardo
         }
-        asistencias[documento] = asistencia
-        with open("asistencias.json", "w") as guardar:
-            json.dump(asistencias, guardar, indent=4)   
-        print("Asistencia registrada correctamente.")
+        if confirmacion not in asistencias:
+            asistencias[confirmacion] = {}
+
+        asistencias[confirmacion].append(asistencia)
+        asistencias_hoy.add[confirmacion]
+        print ("Asistencia registrada correctamente.")
+    for documento in estudiantes:
+        if documento not in asistencias_hoy:
+            asistencia = {
+                "fecha": fecha,
+                "hora": "N/A",
+                "nombre": estudiantes[documento]["nombre"],
+                "apellido": estudiantes[documento]["apellido"],
+                "grado": estudiantes[documento]["grado"],
+                "asistencia": "Ausente",
+                "retardo": "No"
+            }
+            if documento not in asistencias:
+                asistencias[documento] = []
+            asistencias[documento].append(asistencia)
+            print(f"🚫 {estudiantes[documento]['nombre']} {estudiantes[documento]['apellido']} fue marcado como AUSENTE.")
+
+    with open("asistencias.json", "w") as f:
+        json.dump(asistencias, f, indent=4)
+
