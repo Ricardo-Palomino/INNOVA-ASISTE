@@ -1,5 +1,5 @@
 from main import menu_profesor, menu_estudiante
-from generador_contras import generar_contrasena
+from generador_contras import generar_contraseña
 def iniciar_sesion_profesor():
     import json
     print("Ingrese su usuario")
@@ -7,7 +7,7 @@ def iniciar_sesion_profesor():
     print("Ingrese su contraseña")
     contrasena = input("Contraseña: ")
     try:
-        with open("usuarios.json", "r") as cargar:
+        with open("user_info.json", "r") as cargar:
             usuarios = json.load(cargar)
     except (FileNotFoundError, json.JSONDecodeError):
         print("No hay usuarios registrados.")
@@ -29,7 +29,7 @@ def iniciar_sesion_estudiante():
     print("Ingrese su contraseña")
     contrasena = input("Contraseña: ")
     try:
-        with open("usuarios.json", "r") as cargar:
+        with open("user_info.json", "r") as cargar:
             usuarios = json.load(cargar)
     except (FileNotFoundError, json.JSONDecodeError):
         print("No hay usuarios registrados.")
@@ -52,13 +52,13 @@ def registrar_profesor():
     print("Desea usar una contraseña generada automaticamente? (si/no)")
     respuesta = input("Respuesta: ").lower()
     if respuesta == "si":
-        generar_contrasena()
+        generar_contraseña()
     contrasena = input("Contraseña: ")
     if len(contrasena) < 8:
         print("La contraseña debe tener al menos 8 caracteres.")
         return
     try:
-        with open("usuarios.json", "r") as cargar:
+        with open("user_info.json", "r") as cargar:
             usuarios = json.load(cargar)
     except (FileNotFoundError, json.JSONDecodeError):
         usuarios = {}
@@ -66,7 +66,7 @@ def registrar_profesor():
         print("Este usuario ya existe.")
         return
     usuarios[usuario] = {"contrasena": contrasena, "tipo": "profesor"}
-    with open("usuarios.json", "w") as guardar:
+    with open("user_info.json", "w") as guardar:
         json.dump(usuarios, guardar)
     print("Registro exitoso.")
     menu_profesor()
