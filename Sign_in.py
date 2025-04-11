@@ -1,4 +1,5 @@
 from main import menu_profesor, menu_estudiante
+from generador_contras import generar_contrasena
 def iniciar_sesion_profesor():
     import json
     print("Ingrese su usuario")
@@ -48,7 +49,14 @@ def registrar_profesor():
     print("Ingrese su usuario")
     usuario = input("Usuario: ")
     print("Ingrese su contraseña")
+    print("Desea usar una contraseña generada automaticamente? (si/no)")
+    respuesta = input("Respuesta: ").lower()
+    if respuesta == "si":
+        generar_contrasena()
     contrasena = input("Contraseña: ")
+    if len(contrasena) < 8:
+        print("La contraseña debe tener al menos 8 caracteres.")
+        return
     try:
         with open("usuarios.json", "r") as cargar:
             usuarios = json.load(cargar)
