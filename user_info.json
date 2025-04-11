@@ -1,0 +1,18 @@
+{
+    "superadmin": {
+        "contrasena": "campus2023",
+        "tipo": "profesor"
+    },
+    "1099365867": {
+        "contrasena": "tatan1926",
+        "tipo": "estudiante"
+    },
+    "1005298306": {
+        "contrasena": "sergio203495",
+        "tipo": "estudiante"
+    },
+    "1098621425": {
+        "contrasena": "campusino",
+        "tipo": "estudiante"
+    }
+}

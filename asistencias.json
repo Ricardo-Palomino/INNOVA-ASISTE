@@ -1,0 +1,25 @@
+{
+    "1099365867": [],
+    "1005298306": [
+        {
+            "fecha": "2025-04-11",
+            "hora": "01:24:03",
+            "nombre": "sergio",
+            "apellido": "lievano",
+            "grado": "10",
+            "asistencia": "Presente",
+            "retardo": "No"
+        }
+    ],
+    "1098621425": [
+        {
+            "fecha": "2025-04-11",
+            "hora": "N/A",
+            "nombre": "Ricardo",
+            "apellido": "Palomino",
+            "grado": "11",
+            "asistencia": "Ausente",
+            "retardo": "No"
+        }
+    ]
+}
