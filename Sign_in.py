@@ -46,6 +46,12 @@ def iniciar_sesion_estudiante():
 
 def registrar_profesor():
     import json
+    print("Ingrese la contraseña de administrador")
+    contrasena_admin = input("Contraseña: ")
+    admin_password = "admin123"
+    if contrasena_admin != admin_password:
+        print("Contraseña incorrecta.")
+        return
     print("Ingrese su usuario")
     usuario = input("Usuario: ")
     print("Ingrese su contraseña")
@@ -53,6 +59,7 @@ def registrar_profesor():
     respuesta = input("Respuesta: ").lower()
     if respuesta == "si":
         generar_contraseña()
+        contrasena = input("Ingrese la contraseña generada: ")
     contrasena = input("Contraseña: ")
     if len(contrasena) < 8:
         print("La contraseña debe tener al menos 8 caracteres.")
