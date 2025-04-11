@@ -44,10 +44,11 @@ def menu_profesor():
             MENU PROFESOR
             1. Tomar asistencia
             2. Listar profesores
-            3. Buscar estudiante
-            4. Modificar
-            5. Eliminar
-            6. Volver al menú principal
+            3. Listar estudiantes
+            4. Buscar estudiante
+            5. Modificar
+            6. Eliminar
+            7. Volver al menú principal
             """)
         print("Elija la opción")
         try:
@@ -85,11 +86,11 @@ def submenu_modificar():
     while True:
         print("------------")
         print("""
-              SUBMENU MODIFICAR
-              1. Editar datos de estudiantes 
-              2. Editar asistencias 
-              3. Volver 
-              """)
+            SUBMENU MODIFICAR
+            1. Editar datos de estudiantes 
+            2. Editar asistencias 
+            3. Volver 
+            """)
         print("Elija la opción")
         try: 
             decision = int(input("Opción: "))
