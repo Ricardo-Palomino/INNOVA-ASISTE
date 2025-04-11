@@ -24,60 +24,57 @@ def editar_datos_estudiante():
             print("El grado debe ser un número.")
             return
         print("Cambiando los datos del estudiante")
-        estudiante_editado= {
+        estudiantes[documento]= {
             "nombre": nombre,
             "apellido": apellido,
             "grado": grado
         }
-        estudiantes[documento].append(estudiante_editado)
         with open("estudiantes.json", "w") as guardar:
-            json.dump(estudiantes, guardar)
+            json.dump(estudiantes, guardar, indent=4)
 
 def editar_asistencias():
     import json
     import datetime
-    print ("Ingrese el documento de identidad del estudiante")
-    documento= input("Documento: ")
+
+    print("Ingrese el documento de identidad del estudiante:")
+    documento = input("Documento: ")
+
     try:
         with open("asistencias.json", "r") as cargar:
-            asistencias=json.load(cargar)
-    except (FileNotFoundError) (json.JSONDecodeError):
-        asistencias= {}
+            asistencias = json.load(cargar)
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("No se pudo cargar el archivo de asistencias.")
+        return
+
     if documento not in asistencias:
-        print("El documento de ese estudiante no existe")
-    else:
-        print ("Ingrese la fecha de la asistencia a editar")
-        fecha= input("Fecha: ")
-        try:
-            fecha = datetime.datetime.strptime(fecha, "%Y-%m-%d").date()
-        except ValueError:
-            print("Formato de fecha no válido. Use YYYY-MM-DD.")
-            return
-        if fecha not in asistencias[documento]:
-            print("No hay asistencia registrada para esa fecha.")
-            return
-        else:
-            print("Ingrese la nueva asistencia")
-            hora_llegada= input("Hora de llegada: ")
-            try:
-                hora_llegada = datetime.datetime.strptime(hora_llegada, "%H:%M:%S").time()
-            except ValueError:
-                print("Formato de hora no válido. Use HH:MM:SS.")
-                return
-            if hora_llegada > datetime.time(6, 30):
-                print("Retardo agregado")
-                retardo= "si"
-            else:
-                retardo= "no"
-            asistencia_editada= {
-                "fecha": fecha,
-                "hora_llegada": hora_llegada,
-                "Nombre": asistencias[documento]["nombre"],
-                "Apellido ": asistencias[documento]["apellido"],
-                "Grado ": asistencias[retardo]["grado"],
-                "Asistencia ": "Presente",
-                "retardo": retardo
-                }
-            asistencias[documento].append(asistencia_editada)
-            with open("asistencias.json", "w") as guardar:
-                json.dump(asistencias, guardar)
+        print("El documento de ese estudiante no existe.")
+        return
+    print("Ingrese la fecha de la asistencia a editar (formato: YYYY-MM-DD):")
+    fecha_input = input("Fecha: ")
+    try:
+        fecha_obj = datetime.datetime.strptime(fecha_input, "%Y-%m-%d").date()
+    except ValueError:
+        print("Formato de fecha no válido. Use YYYY-MM-DD.")
+        return
+    asistencia_lista = asistencias[documento]
+    asistencia_encontrada = None
+    for asistencia in asistencia_lista:
+        if asistencia.get("fecha") == fecha_input:
+            asistencia_encontrada = asistencia
+            break
+    if not asistencia_encontrada:
+        print("No hay asistencia registrada para esa fecha.")
+        return
+    print("Ingrese la nueva hora de llegada (formato: HH:MM:SS):")
+    hora_llegada_input = input("Hora: ")
+    try:
+        hora_llegada_obj = datetime.datetime.strptime(hora_llegada_input, "%H:%M:%S").time()
+    except ValueError:
+        print("Formato de hora no válido. Use HH:MM:SS.")
+        return
+    retardo = "Si" if hora_llegada_obj > datetime.time(6, 30) else "No"
+    asistencia_encontrada["hora"] = hora_llegada_input
+    asistencia_encontrada["retardo"] = retardo
+    print("Asistencia actualizada correctamente.")
+    with open("asistencias.json", "w") as guardar:
+        json.dump(asistencias, guardar, indent=4)

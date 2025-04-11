@@ -74,7 +74,7 @@ def registrar_profesor():
         return
     usuarios[usuario] = {"contrasena": contrasena, "tipo": "profesor"}
     with open("user_info.json", "w") as guardar:
-        json.dump(usuarios, guardar)
+        json.dump(usuarios, guardar, indent=4)
     print("Registro exitoso.")
     menu_profesor()
 

@@ -8,7 +8,7 @@ def menu_principal():
             print("-------------")
             print("""
                 MENU PRINCIPAL
-                1. Registrar profesor
+                1. Registrar profesor(admin)
                 2. Profesor 
                 3. Estudiante
                 4. Salir
@@ -36,7 +36,7 @@ def menu_principal():
 
 def menu_profesor():
     from funcionalidad_listar import listar_profesores, listar_estudiantes
-    from funcionalidad_registrar import register_attendance
+    from funcionalidad_registrar import register_attendance, registrar_student
     from funcionalidad_buscar import buscar_student
     while True:
         print("-------------")
@@ -48,7 +48,8 @@ def menu_profesor():
             4. Buscar estudiante
             5. Modificar
             6. Eliminar
-            7. Volver al menú principal
+            7. Registrar estudiante
+            8. Volver al menú principal
             """)
         print("Elija la opción")
         try:
@@ -74,6 +75,10 @@ def menu_profesor():
                 print("eliminar")
                 submenu_eliminar()
             elif decision == 7:
+                print("Registrar estudiante")
+                registrar_student()
+                break
+            elif decision == 8:
                 print("Volver al menú principal...")
                 break
             else:
@@ -117,9 +122,7 @@ def submenu_eliminar():
             print("1. Eliminar asistencia de un estudiante")
             print("2. Eliminar estudiante")
             print("3. Volver al menú principal")
-        
-            opcion = input("Seleccione una opción (1-4): ")
-        
+            opcion = input("Seleccione una opción: ")
             if opcion == "1":
                 print("Lógica para eliminar asistencia...")
                 eliminar_asistencia()  
@@ -146,8 +149,8 @@ def menu_estudiante():
             if opcion <= 0:
                 print("Opción no válida")
             elif opcion == 1:
-                print("Verificando retrasos...")
-                listar_retardos_estudiantes
+                print("Verificar retrasos")
+                listar_retardos_estudiantes()
             elif opcion == 2:
                 print("Mostrando asistencias...")
                 listar_asistencias_estudiantes()
@@ -159,4 +162,3 @@ def menu_estudiante():
                 
         except ValueError:
             print("ERROR: Por favor ingrese un número válido")
-menu_principal()
