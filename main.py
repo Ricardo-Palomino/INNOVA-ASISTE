@@ -1,10 +1,6 @@
-from funcionalidad_registrar import register_docente, register_attendance
-from Sign_in import iniciar_sesion_profesor, iniciar_sesion_estudiante
-from funcionalidad_listar import listar_profesores, listar_estudiantes, listar_asistencias_estudiantes, listar_retardos_estudiantes
-from funcionalidad_buscar import buscar_student
-from funcionalidad_eliminar import eliminar_estudiante, eliminar_asistencia
-from funcionalidad_editar import editar_datos_estudiante, editar_asistencias
+
 def menu_principal():
+    from Sign_in import iniciar_sesion_profesor, iniciar_sesion_estudiante, registrar_profesor
     print("COLEGIO PORTAL CAMPESTRE NORTE")
     print("BIENVENIDO")
     try:
@@ -23,7 +19,7 @@ def menu_principal():
                 print("Opción no válida")
             elif decision == 1:
                 print("Registrar profesor")
-                register_docente()
+                registrar_profesor()
             elif decision == 2:
                 print("Profesor")
                 iniciar_sesion_profesor()  
@@ -39,6 +35,9 @@ def menu_principal():
         print("ERROR, dirigido al inicio")
 
 def menu_profesor():
+    from funcionalidad_listar import listar_profesores, listar_estudiantes
+    from funcionalidad_registrar import register_attendance
+    from funcionalidad_buscar import buscar_student
     while True:
         print("-------------")
         print("""
@@ -62,23 +61,27 @@ def menu_profesor():
                 print("Listar profesores")
                 listar_profesores()
             elif decision == 3:
-                print("Buscar estudiante") 
-                buscar_student()
+                print("Listar estudiantes") 
+                listar_estudiantes()
             elif decision == 4:
-                print("Modificar")
-                submenu_modificar()
+                print("Buscar un estudiante")
+                buscar_student()
             elif decision == 5:
-                print("Eliminar")
-                submenu_eliminar()
+                print("modificar")
+                submenu_modificar()
             elif decision == 6:
-                print("Volviendo al menú principal...")
-                break  
+                print("eliminar")
+                submenu_eliminar()
+            elif decision == 7:
+                print("Volver al menú principal...")
+                break
             else:
                 print("Opción no válida")
         except ValueError:
             print("ERROR: Debe ingresar un número válido.")
 
 def submenu_modificar():
+    from funcionalidad_editar import editar_datos_estudiante, editar_asistencias
     while True:
         print("------------")
         print("""
@@ -107,12 +110,12 @@ def submenu_modificar():
             print("ERROR: Debe ingresar un número válido.")
 
 def submenu_eliminar():
+        from funcionalidad_eliminar import eliminar_asistencia, eliminar_estudiante
         while True:
             print("\n--- ¿Qué deseas eliminar? ---")
             print("1. Eliminar asistencia de un estudiante")
-            print("2. Eliminar retardo de un estudiante")
-            print("3. Eliminar estudiante")
-            print("4. Volver al menú principal")
+            print("2. Eliminar estudiante")
+            print("3. Volver al menú principal")
         
             opcion = input("Seleccione una opción (1-4): ")
         
@@ -120,24 +123,21 @@ def submenu_eliminar():
                 print("Lógica para eliminar asistencia...")
                 eliminar_asistencia()  
             elif opcion == "2":
-                print("Lógica para eliminar retardo.z..")
-                eliminar_retardo() 
-            elif opcion == "3":
                 print("Lógica para eliminar estudiante...")  
                 eliminar_estudiante()
-            elif opcion == "4":
+            elif opcion == "3":
                 break  
             else:
                 print(" Opción no válida. Intente de nuevo.")
 
 
 def menu_estudiante():
+    from funcionalidad_listar import listar_retardos_estudiantes, listar_asistencias_estudiantes
     while True:
         print("\n=== MENÚ DE ESTUDIANTE ===")
         print("1. Ver retrasos")
         print("2. Ver asistencias")
-        print("3. Ver inasistencias")
-        print("4. Salir")
+        print("3. Salir")
         
         try:
             opcion = int(input("\nSeleccione una opción: "))
@@ -151,8 +151,6 @@ def menu_estudiante():
                 print("Mostrando asistencias...")
                 listar_asistencias_estudiantes()
             elif opcion == 3:
-                print("Mostrando inasistencias...")
-            elif opcion == 4:
                 print("Regresando al menú principal...")
                 break
             else:
