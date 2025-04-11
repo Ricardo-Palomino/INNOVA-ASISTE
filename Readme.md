@@ -40,7 +40,7 @@ INNOVA-ASISTE/
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/tu_usuario/INNOVA-ASISTE.git
+   git clone https://github.com/Ricardo-Palomino/INNOVA-ASISTE.git
    cd INNOVA-ASISTE
    ```
 
@@ -77,10 +77,8 @@ INNOVA-ASISTE/
 
 ### 🧩 Mejoras Futuras
 
-- Exportación de datos a Excel o PDF
-- Interfaz gráfica con Tkinter o PyQt
-- Implementación de roles (admin, docente)
-- Integración con bases de datos SQL
+- Funcion para cambiar contraseña y usuario
+- Incorporar las funcionalidades de asignaturas
 
 ---
 
