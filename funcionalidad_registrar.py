@@ -1,4 +1,5 @@
 def registrar_student():
+    from generador_contras import generar_contraseña
     import json
     print("Ingrese el numero de documento del estudiante:")
     documento = input("Documento: ")
@@ -14,6 +15,28 @@ def registrar_student():
         print("El documento ya existe.")
         return
     else:
+        print("Creacion de usuario")
+        usuario= documento
+        print("Ingrese una contraseña para el estudiante")
+        print("Desea usar una contraseña generada automaticamente? (si/no)")
+        respuesta = input("Respuesta: ").lower()
+        if respuesta == "si":
+            generar_contraseña()
+            print("La ha sido generada automaticamente")
+            print("ingrese la contraseña generada")
+            contrasena = input("Contraseña: ")
+        contrasena = input("Contraseña: ")
+        if len(contrasena) < 8 or len(contrasena) > 20:
+            print("La contraseña debe tener entre 8 y 20 caracteres.")
+            return
+        try:
+            with open("user_info.json", "r") as cargar:
+                usuarios = json.load(cargar)
+        except (FileNotFoundError, json.JSONDecodeError):
+            usuarios = {}
+        usuarios[usuario]= {"contrasena": contrasena, "tipo": "estudiante"}
+        with open ("user_info.json", "w") as guardar:
+            json.dump(usuarios, guardar, indent=4)
         print("Ingrese los siguientes datos del estudiante:")
         nombre = input("Nombre: ")
         if not nombre.replace(" ", "").isalpha():
